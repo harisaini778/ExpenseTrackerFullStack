@@ -20,7 +20,7 @@ createConnection(); // Assuming this function sets up your database connection
 // User Controllers access
 app.use('/users', UserController);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}.`);
