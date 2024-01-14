@@ -37,4 +37,41 @@ createUser: async(username,email,password,premiumUser) => {
     }
 },
 
-}
+getUserByEmail : async (email) => {
+    try {
+
+     const connection = await createConnection();
+
+     const [rows] = await connection.query(
+        "SELECT * FROM users WHERE email = ?",
+        [email]
+     );
+     connection.end();
+
+     if(rows.length > 0) {
+        return rows[0];
+     }else {
+        return null;
+     }
+
+    }catch(err) {
+    console.log("Error checking if users exists by email");
+    throw err;
+    }
+},
+
+getAllUsers: async () => {
+    try {
+        const connection = await createConnection();
+        const [rows] = await connection.query('SELECT * FROM users');
+        connection.end();
+        return rows;
+    } catch (err) {
+        console.error('Error fetching users.', err);
+        throw err;
+    }
+},
+
+};
+
+module.exports = UserModel;
